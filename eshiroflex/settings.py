@@ -80,9 +80,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'postgres',
         'USER': 'postgres',
-        'PASSWORD': '12345',
+        'PASSWORD': 'P0stgreSql',
         'HOST': 'localhost',  # Usually 'localhost' or an IP
-        'PORT': '5432',  # Default PostgreSQL port is 5432
+        'PORT': '5433',  # Default PostgreSQL port is 5432
     }
 }
 
@@ -128,4 +128,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-AUTH_USER_MODEL = "store.User"
+AUTH_USER_MODEL = 'store.User'
+
