@@ -7,15 +7,16 @@ class User(AbstractUser):
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=255)
 
-    USERNAME_FIELD = 'email'  # Allows logging in with email instead of username
-    REQUIRED_FIELDS = ['username']  # Keeps 'username' required but not for login
+    USERNAME_FIELD = 'email'  
+    REQUIRED_FIELDS = ['username'] 
 
     def __str__(self):
         return self.email
+    
 # Category Model
 class Category(models.Model):
     name = models.CharField(max_length=255, unique=True)
-
+    
     def __str__(self):
         return self.name
 
