@@ -78,9 +78,9 @@ WSGI_APPLICATION = 'eshiroflex.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
+        'NAME': 'Shene',
         'USER': 'postgres',
-        'PASSWORD': '12345',
+        'PASSWORD': 'kingdom2504',
         'HOST': 'localhost',  # Usually 'localhost' or an IP
         'PORT': '5432',  # Default PostgreSQL port is 5432
     }

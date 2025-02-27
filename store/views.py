@@ -5,7 +5,6 @@ from .models import Product, Category
 
 User = get_user_model()
 
-# Import serializers inside the class to avoid circular imports
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
 
@@ -13,14 +12,12 @@ class CategoryViewSet(viewsets.ModelViewSet):
         from .serializers import CategorySerializer
         return CategorySerializer
 
-
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
 
     def get_serializer_class(self):
         from .serializers import ProductSerializer
         return ProductSerializer
-
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
