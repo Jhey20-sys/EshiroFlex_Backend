@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
-from .models import Product, Category, Cart
+from django.contrib.auth.password_validation import validate_password
+from .models import Product, Category
 
 User = get_user_model()
 
@@ -20,18 +21,29 @@ class CategorySerializer(serializers.ModelSerializer):
 
 # Product Serializer
 class ProductSerializer(serializers.ModelSerializer):
-    category = CategorySerializer(read_only=True)
+    category = serializers.SlugRelatedField(
+        queryset=Category.objects.all(),
+        slug_field="name" 
+    )
 
     class Meta:
         model = Product
         fields = '__all__'
 
-# Cart Serializer
-class CartSerializer(serializers.ModelSerializer):
-    product = ProductSerializer(read_only=True)  # Nest ProductSerializer to include product details
-    user = serializers.StringRelatedField()  # Display username instead of ID
+class RegisterSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
+    password2 = serializers.CharField(write_only=True, required=True)
 
-        
     class Meta:
-        model = Cart
-        fields = '__all__'  # Ensures all fields are included
+        model = User
+        fields = ['username', 'email', 'password', 'password2']
+
+    def validate(self, attrs):
+        if attrs['password'] != attrs['password2']:
+            raise serializers.ValidationError({"password": "Passwords do not match."})
+        return attrs
+
+    def create(self, validated_data):
+        validated_data.pop('password2')  
+        user = User.objects.create_user(**validated_data)
+        return user
