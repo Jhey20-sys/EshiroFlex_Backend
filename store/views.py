@@ -12,6 +12,8 @@ from .serializers import (
     ProductSerializer, CategorySerializer, UserSerializer, RegisterSerializer,
     OrderSerializer, CartSerializer, WishlistSerializer, PaymentSerializer
 )
+from django.views.decorators.csrf import csrf_exempt
+import json
 
 User = get_user_model()
 

@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'store',
+    'corsheaders',
 ]
 
 # Middleware
@@ -81,8 +82,12 @@ AUTH_USER_MODEL = "store.User"
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',
     ),
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ]
 }
 
 # Password Validation
@@ -122,7 +127,8 @@ if DEBUG:
 
 # CORS (For frontend connection)
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",  # Change based on frontend URL
+    "http://localhost:5173",  # Change based on frontend URL
+    # "https://yourfrontenddomain.com" ("https://myapp.vercel.app"  # Your actual frontend domain)
 ]
 
 # CSRF Trusted Origins
