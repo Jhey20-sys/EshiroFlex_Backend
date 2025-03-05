@@ -242,3 +242,11 @@ class PaymentViewSet(viewsets.ViewSet):
         payment.status = "refunded"
         payment.save()
         return Response({"message": "Refund successful", "payment_id": payment.id}, status=status.HTTP_200_OK)
+
+class ProductListView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        products = Product.objects.all()
+        serializer = ProductSerializer(products, many=True)
+        return Response(serializer.data)
