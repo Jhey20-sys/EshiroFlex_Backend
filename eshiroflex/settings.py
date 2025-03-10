@@ -21,7 +21,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
+    
     'rest_framework',
+    'django_extensions',
     'rest_framework.authtoken',
     'store',
     'corsheaders',
@@ -78,14 +80,19 @@ DATABASES = {
 }
 
 # Authentication
-AUTH_USER_MODEL = "store.User"
+AUTH_USER_MODEL = 'store.User'
+
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_PARSER_CLASSES': [
+        'rest_framework.parsers.JSONParser',
     ],
 }
 
@@ -124,11 +131,18 @@ EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', 'buri wktu cqwo putk')
 if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+CORS_ALLOW_ALL_ORIGINS = True 
+
+CORS_ALLOW_CREDENTIALS = True
+
 # CORS (For frontend connection)
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",  # Change based on frontend URL
+    "http://127.0.0.1:5173",
     # "https://yourfrontenddomain.com" ("https://myapp.vercel.app"  # Your actual frontend domain)
 ]
+
+
 
 # CSRF Trusted Origins
 CSRF_TRUSTED_ORIGINS = [
