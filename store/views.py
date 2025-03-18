@@ -189,6 +189,11 @@ class ProfileView(generics.RetrieveAPIView):
     def get_object(self):
         return self.request.user
 
+    def get(self, request, *args, **kwargs):
+        user = self.get_object()
+        serializer = self.get_serializer(user)
+        return Response(serializer.data)
+
 class LogoutView(APIView):
     permission_classes = [IsAuthenticated]
 
