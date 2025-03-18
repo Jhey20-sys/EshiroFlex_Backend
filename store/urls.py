@@ -57,6 +57,6 @@ urlpatterns = [
     # Product
     path('products/', ProductView.as_view(), name='product-list'),
 
-    path("api/order-items/create/", CreateOrderItemView.as_view(), name="create-order-item"),
+    path("order-items/create/", CreateOrderItemView.as_view(), name="create-order-item"),
 
 ]
